@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<script type="text/javascript" src="common/js/xmlUtil.js"></script>
+	<link rel="stylesheet" type="text/css" href="css/style.css">
+</head>
+<body>
+	<table id="table">
+		<tr>
+			<th></th>
+			<th>FIRSTNAME</th>
+			<th>LASTNAME</th>
+			<th>YEARS</th>
+			<th>SEX</th>
+		</tr>	
+	</table>				
+
+<script type="text/javascript">
+	var xml = new XMLDoc();
+	xml.load("xml/test2.xml");
+	xml.toChild("/item/member");
+
+	var node_tr;	//HTML tr標籤的node
+	var node_td_0;	//HTML td標籤的node(第一格的空值)
+	var node_td_1,node_text;	//HTML td標籤的node，以及存放Text的文字node
+
+	do{	//以迴圈方式跑出每一筆資料
+	xml.toChild("firstname");	
+		
+	node_tr = document.createElement("tr");	  //新增HTML tr的node
+	node_td_0 = document.createElement("td");	//新增HTML td的node(第一格的空值)
+	node_tr.appendChild(node_td_0);	//將第一格空值td丟進tr
+
+	do{	//以迴圈方式跑出每筆資料的細項
+	node_td_1 = document.createElement("td");	//新增HTML td的node
+	node_text = document.createTextNode(xml.getText());	//新增文字node
+
+	node_td_1.appendChild(node_text);	//將文字node丟進td node
+	node_tr.appendChild(node_td_1);		//將td node丟進tr node
+	}while(xml.toNext());	//下一筆細項，沒有細項跳出迴圈
+	
+	document.getElementById("table").appendChild(node_tr);	//將這筆資料tr丟進table
+	
+	xml.toParent();		//回到上一層member
+	}while(xml.toNext());	//下一筆資料，沒有資料跳出迴圈
+	//xml.save("xml/test2.xml")
+	var newfile = new ActiveXObject("Scripting.FileSystemObject");
+var creatxml=newfile.CreateTextFile("xml/test2.xml",true,true);//使用FSO建立XML
+
+
+var m_content=xml.xml;
+newfile.WriteLine(m_content);
+creatxml.close();
+	
+</script>
+</body>
+</html>

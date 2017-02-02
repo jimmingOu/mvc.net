@@ -1,0 +1,19 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<bookstore>
+	<book>
+		<title>XML</title>
+		<price>200</price>
+	</book>
+	<book>
+		<title>C/C++</title>
+		<price>100</price>
+	</book>
+	<book>
+		<title>SQL</title>
+		<price>350</price>
+	</book>
+	<book>
+		<title>Java</title>
+		<price>299</price>
+	</book>
+</bookstore>

@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<script type="text/javascript" src="common/js/xmlUtil.js"></script>
+</head>
+<body>
+<div>
+	<span>姓名</span><span class ="name"></span>
+	<span>年齡</span><span class ="age"></span>
+</div>
+<div>
+	<span>姓名</span><span class ="name"></span>
+	<span>年齡</span><span class ="age"></span>
+</div>
+<div>
+	<span>姓名</span><span class ="name"></span>
+	<span>年齡</span><span class ="age"></span>
+</div>
+<div></div>
+
+<script type="text/javascript">
+
+	var xml = new XMLDoc();
+	xml.loadXML("<root></root>");
+	
+	xml.toChild("/root");
+	xml.appendChild("item");	
+	xml.toLastChild();
+	xml.appendChild("name","AAA");
+	xml.appendChild("age",19);
+
+	xml.toChild("/root");
+	xml.appendChild("item");
+	xml.toLastChild();
+	xml.appendChild("name","BBB");
+	xml.appendChild("age",22);
+
+	xml.toChild("/root");
+	xml.appendChild("item");
+	xml.toLastChild();
+	xml.appendChild("name","CCC");
+	xml.appendChild("age",26);
+
+//	alert(xml.xml());
+
+	var Name,Age;
+
+	for(var i=0; i<3; i++){
+		xml.toChild("/root/item",i);
+		
+		xml.toChild("name");
+		Name = xml.getText();
+
+		xml.toSibling("age"); 
+		Age = xml.getTextInt();	
+
+		document.getElementsByClassName("name")[i].innerHTML = Name;
+		document.getElementsByClassName("age")[i].innerHTML = Age;	
+	}
+
+//	xml.toNext(); 移到"同"層的下一個
+
+</script>
+
+</body>
+</html>

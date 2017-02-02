@@ -1,0 +1,13 @@
+table,th{
+	border:1px solid #000;
+	margin: 0 auto;
+	width: 20%
+}
+table,tr{
+	width: 100%;
+}
+td{
+	margin: 0 auto;
+	padding: 0 auto;
+	border-bottom: 1px solid #000; 
+}

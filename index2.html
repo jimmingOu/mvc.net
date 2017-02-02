@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<script type="text/javascript" src="common/js/xmlUtil.js"></script>
+</head>
+<body>
+	<div>
+		<span>書名</span><span class="title"></span>
+		<span>價錢</span><span class="price"></span>
+	</div>
+	<div>
+		<span>書名</span><span class="title"></span>
+		<span>價錢</span><span class="price"></span>
+	</div>
+	<div>
+		<span>書名</span><span class="title"></span>
+		<span>價錢</span><span class="price"></span>
+	</div>
+	<div>
+		<span>書名</span><span class="title"></span>
+		<span>價錢</span><span class="price"></span>
+	</div>						
+<script type="text/javascript">
+	var xml = new XMLDoc();
+	xml.load("xml/test.xml");
+	xml.toChild("/bookstore");
+	xml.toLastChild();
+	xml.toChild("book");
+	xml.toLastChild();
+	xml.setAttribute("end",1);	//設定結束迴圈條件
+	var i = 0; //計數器 
+
+//alert(xml.xml());
+
+	do{
+		xml.toChild("/bookstore");
+		xml.toChild("book",i);
+		xml.toChild("title");
+		document.getElementsByClassName("title")[i].innerHTML = xml.getText();
+		xml.toSibling("price");
+		document.getElementsByClassName("price")[i].innerHTML = xml.getTextInt();
+		i++;
+	}while(xml.getAttribute("end") != 1);	
+
+</script>
+</body>
+</html>
